@@ -14,6 +14,7 @@ import (
 	classificationService "datamining-be/internal/service/classification"
 
 	"github.com/SIC-Unud/sicgolib"
+	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 )
 
@@ -30,7 +31,7 @@ func (cc classificationController) handleClassification(rw http.ResponseWriter, 
 	if err != nil {
 		log.Printf("%v -> %v", utilities.Red("ERROR"), err.Error())
 	}
-	res, err := sicgolib.UploadToImagekit(r.Context(), ik, cc.cfg.PublicKey, cc.cfg.PrivateKey, file, "file", "/datamining")
+	res, err := sicgolib.UploadToImagekit(r.Context(), ik, cc.cfg.PublicKey, cc.cfg.PrivateKey, file, uuid.New().String(), "/datamining")
 	if err != nil {
 		log.Printf("%v -> %v", utilities.Red("ERROR"), err.Error())
 	}
